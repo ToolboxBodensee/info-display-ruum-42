@@ -1,0 +1,6 @@
+#!/bin/bash
+/usr/bin/tmux new-session -d '/home/pi/infobeamer-tb/info-beamer /home/pi/infobeamer-tb/toolbox'
+sleep 3
+python /home/pi/infobeamer-tb/setclock.py
+cd /home/pi/infobeamer-tb/toolbox/oepnv/
+/home/pi/infobeamer-tb/toolbox/oepnv/service &
