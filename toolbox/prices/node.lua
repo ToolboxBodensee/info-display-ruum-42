@@ -9,11 +9,12 @@ util.resource_loader{
 local Absatz = "absatz"
 
 local preise = {
-    {"Mate",      "1.5"},
+    {"Club Mate",      "1.2"},
+    {"Andere Mate",      "1.5"},
     {"Cola",      "1.5"},
     {"Spezi",     "1"},
     Absatz,
-    {"Wasser",    "0.5"},
+    {"Wasser",    "0.75"},
     Absatz,
     {"2 Kekse",   "0.5"},
 }
@@ -280,7 +281,7 @@ end
 
 local pic = PicRotation(980, 350, WIDTH-100, HEIGHT-200, 8)
 local term = Crapterm(source, 40, 950, 100)
-local preisliste = Preisliste(preise, 40, 50, 640, 105)
+local preisliste = Preisliste(preise, 40, 50, 640, 90)
 
 local countdown = sys.now() + math.random() * 10
 
