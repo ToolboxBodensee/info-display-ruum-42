@@ -9,14 +9,17 @@ util.resource_loader{
 local Absatz = "absatz"
 
 local preise = {
-    {"Club Mate",      "1.2"},
-    {"Andere Mate",      "1.5"},
-    {"Cola",      "1.5"},
-    {"Spezi",     "1"},
-    Absatz,
+    {"Mate",      "1.5"},
+    {"Bier/Radler",      "1.5"},
+    {"Premium Cola",      "1.5"},
+    {"Spezi,Saft",     "1"},
+    {"Glorietta",     "1"},
+    {"Plastikfla.",    "0.75"},
     {"Wasser",    "0.75"},
     Absatz,
-    {"2 Kekse",   "0.5"},
+    {"Snacks",   "0.5"},
+    {"Waffeln",   "0.5"},
+    {"Pizza*",   "2,5"},
 }
 
 function Preisliste(preise, x, y, spacing, size)
@@ -281,7 +284,7 @@ end
 
 local pic = PicRotation(980, 350, WIDTH-100, HEIGHT-200, 8)
 local term = Crapterm(source, 40, 950, 100)
-local preisliste = Preisliste(preise, 40, 50, 640, 90)
+local preisliste = Preisliste(preise, 40, 50, 640, 80)
 
 local countdown = sys.now() + math.random() * 10
 
