@@ -14,6 +14,6 @@ Dort sollen dann Bilder aus der Toolbox und lustige Memes in Abwechslung mit nü
    
  Dieses System
 ------------------
- + Hostname: ``info-beamer.tbbs.me``
+ + Hostname: ``info-display.tbbs.me``
  + Details: ``Dieses git wird alle 5 Minuten gepullt und so der Info-Beamer aktualisiert.`` <br/>
  ``info-beamer übernimmt automatisch die geänderte Dateien!``
