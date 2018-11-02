@@ -1,4 +1,4 @@
- Info Beamer in der Toolbox
+ Info-Beamer in der Toolbox
 ===============================
 
 In der Toolbox gibt es vor dem ruum42 ein [Info-Display](https://toolbox-bodensee.de/projekte/info-display/).
@@ -15,5 +15,5 @@ Dort sollen dann Bilder aus der Toolbox und lustige Memes in Abwechslung mit nü
  Dieses System
 ------------------
  + Hostname: ``info-beamer.tbbs.me``
- + Details: ``Dieses git wird jede Stunde gepullt.`` <br/>
+ + Details: ``Dieses git wird alle 5 Minuten gepullt und so der Info-Beamer aktualisiert.`` <br/>
  ``info-beamer übernimmt automatisch die geänderte Dateien!``
