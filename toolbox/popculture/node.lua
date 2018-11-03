@@ -31,6 +31,17 @@ local function alphanumsort(o)
     return o
 end
 
+local function randsort(o)
+    local o2 = {}
+    for i=1,#o do
+        local index = math.random(#o)
+        o2[#o2 + 1] = o[index]
+        table.remove(o, index)
+    end
+    o = o2
+    return o
+end
+
 local pictures = util.generator(function()
     local files = {}
     for name, _ in pairs(ALL_CONTENTS[MEDIA_DIRECTORY]) do
@@ -38,7 +49,7 @@ local pictures = util.generator(function()
             files[#files+1] = name
         end
     end
-    return alphanumsort(files) -- sort files by filename
+    return randsort(files) -- sort files by filename
 end)
 node.event("content_remove", function(filename)
     pictures:remove(filename)
