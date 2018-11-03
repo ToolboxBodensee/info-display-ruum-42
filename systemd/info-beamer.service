@@ -1,0 +1,12 @@
+[Unit]
+Description=info beamer        
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/tmux new-session -d bash -c '/home/pi/infobeamer-tb/start-toolbox-infobeamer; exec bash'
+Type=forking
+Restart=always
+
+[Install]
+WantedBy=default.target
+
