@@ -12,9 +12,9 @@ local preise = {
     {"Mate",      "1.5"},
     {"Bier/Radler",      "1.5"},
     {"Premium Cola",      "1.5"},
-    {"Spezi,Saft",     "1"},
+    {"Spezi, Saft",     "1"},
     {"Glorietta",     "1"},
-    {"Plastikfla.",    "0.75"},
+    {"Plastikflasche",    "0.75"},
     {"Wasser",    "0.75"},
     Absatz,
     {"Snacks",   "0.5"},
@@ -283,8 +283,8 @@ function Crapterm(source, x, y, size)
 end
 
 local pic = PicRotation(980, 350, WIDTH-100, HEIGHT-200, 8)
-local term = Crapterm(source, 40, 950, 100)
-local preisliste = Preisliste(preise, 40, 50, 640, 80)
+local term = Crapterm(source, 35, 950, 100)
+local preisliste = Preisliste(preise, 35, 50, 640, 80)
 
 local countdown = sys.now() + math.random() * 10
 
