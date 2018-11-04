@@ -3,7 +3,7 @@ Description=multec image collector
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/gst-launch-1.0 -e urisourcebin uri=http://multec.tbbs.me/webcam/?action=stream ! multipartdemux ! image/jpeg,framerate=10/1 ! jpegparse ! jpegdec ! videorate ! video/x-raw,framerate=1/120 ! jpegenc ! multifilesink max-files=1 location="/home/pi/infobeamer-tb/toolbox/3dprinter/bilder/multec.jpg"
+ExecStart=/usr/bin/gst-launch-1.0 -e urisourcebin uri=http://multec.tbbs.me/webcam/?action=stream ! multipartdemux ! image/jpeg,framerate=10/1 ! jpegparse ! jpegdec ! videorate ! video/x-raw,framerate=1/120 ! jpegenc ! multifilesink max-files=1 location="/home/pi/infobeamer-tb/toolbox/3dprinter/media/multec.jpg"
 Type=simple
 Restart=always
 

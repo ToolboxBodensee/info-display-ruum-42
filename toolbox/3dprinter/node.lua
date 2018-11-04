@@ -12,7 +12,7 @@ local SWITCH_TIME = 2.0
 
 -- Media directory. Set to '' to have your
 -- images in the current directory.
-local MEDIA_DIRECTORY = 'bilder'
+local MEDIA_DIRECTORY = 'media'
 
 ----------------------------------------------------------------
 local ALL_CONTENTS, ALL_CHILDS = node.make_nested()
