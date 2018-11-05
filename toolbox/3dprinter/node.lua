@@ -1,26 +1,43 @@
--- at which intervals should the screen switch to the
--- next image?
-local INTERVAL = 5 
-
--- enough time to load next image
-local SWITCH_DELAY = 1
-
--- transition time in seconds.
--- set it to 0 switching instantaneously
-local SWITCH_TIME = 2.0
-
-
--- Media directory. Set to '' to have your
--- images in the current directory.
 local MEDIA_DIRECTORY = 'media'
 
-----------------------------------------------------------------
 local ALL_CONTENTS, ALL_CHILDS = node.make_nested()
 
-assert(SWITCH_TIME + SWITCH_DELAY < INTERVAL,
-    "INTERVAL must be longer than SWITCH_DELAY + SWITCHTIME")
-
 gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
+
+local video
+local current_updated = {}
+local last_updated = {}
+local playlist
+
+function tablelength(T)
+  local count = 0
+  for _ in pairs(T) do count = count + 1 end
+  return count
+end
+
+function split(inputstr, sep)
+    if sep == nil then
+        sep = "%s"
+    end
+    local t={} ; i=1
+    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+        t[i] = str
+        i = i + 1
+    end
+    return t
+end
+
+function split_name(file)
+    local split_info = {}
+    local split_ext = split(file, ".")
+    local split_name = split(split_ext[1], "_")
+    local split_path = split(split_name[1], "/")
+    split_info["path"] = split_path[1]
+    split_info["name"] = split_path[2]
+    split_info["number"] = split_name[2]
+    split_info["ext"] = split_ext[2]
+    return split_info
+end
 
 local function randsort(o)
     local o2 = {}
@@ -33,47 +50,55 @@ local function randsort(o)
     return o
 end
 
-local pictures = util.generator(function()
-    local files = {}
-    for name, _ in pairs(ALL_CONTENTS[MEDIA_DIRECTORY]) do
-        if name:match(".*jpg") or name:match(".*png") then
-            files[#files+1] = name
+function get_playlist()
+    local playlist = util.generator(function()
+        local files = {}
+        for name, _ in pairs(ALL_CONTENTS[MEDIA_DIRECTORY]) do
+            if name:match(".*mkv") then
+                local split_info = split_name(name)
+                if last_updated[split_info["name"]] ~= nil and last_updated[split_info["name"]] == split_info["number"] then
+                    print("adding file to playlist: "..name)
+                    files[#files+1] = name
+                end
+            end
+        end
+        return randsort(files) -- sort files by filename
+    end)
+    return playlist
+end
+
+node.event("content_remove", function(filename)
+    playlist:remove(filename)
+end)
+
+node.event("content_update", function(file, content)
+    local split_info = split_name(file)
+    if current_updated[split_info["name"]] ~= nil then
+        if not (current_updated[split_info["name"]] == split_info["number"]) then
+            last_updated[split_info["name"]] = current_updated[split_info["name"]]
+            print("selecting for playback: "..split_info["name"].."#"..last_updated[split_info["name"]])
         end
     end
-    return randsort(files) -- sort files by filename
-end)
-node.event("content_remove", function(filename)
-    pictures:remove(filename)
+    current_updated[split_info["name"]] = split_info["number"]
 end)
 
-local current_image = resource.create_colored_texture(0,0,0,0)
-local fade_start = 0
-
-local function next_image()
-    local next_image_name = pictures.next()
-    print("now loading " .. next_image_name)
-    last_image = current_image
-    current_image = resource.load_image(next_image_name)
-    fade_start = sys.now()
+function next_video()
+    if not playlist then
+        playlist = get_playlist()
+    end
+    if video then
+        video:dispose()
+    end
+    video = util.videoplayer(playlist.next(), {loop=false})
 end
 
 function node.render()
-    local delta = sys.now() - fade_start - SWITCH_DELAY
-    if last_image and delta < 0 then
-        util.draw_correct(last_image, 0, 0, WIDTH, HEIGHT)
-    elseif last_image and delta < SWITCH_TIME then
-        local progress = delta / SWITCH_TIME
-        util.draw_correct(last_image, 0, 0, WIDTH, HEIGHT, 1 - progress)
-        util.draw_correct(current_image, 0, 0, WIDTH, HEIGHT, progress)
-    else
-        if last_image then
-            last_image:dispose()
-            last_image = nil
+    local length = tablelength(last_updated)
+    if not (length == 0) then
+        if not video or not video:next() then
+            next_video()
         end
-        util.draw_correct(current_image, 0, 0, WIDTH, HEIGHT)
+        util.draw_correct(video, 0, 0, WIDTH, HEIGHT)
     end
 end
-
-util.set_interval(INTERVAL, next_image)
-
 
