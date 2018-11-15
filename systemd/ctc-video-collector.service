@@ -1,0 +1,12 @@
+[Unit]
+Description=ctc image collector
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/gst-launch-1.0 -e urisourcebin uri=http://ctc.tbbs.me/webcam/?action=stream ! multipartdemux ! image/jpeg,framerate=10/1 ! jpegparse ! jpegdec ! videorate ! video/x-raw,framerate=10/1 ! avenc_h264_omx ! h264parse config-interval=-1 ! splitmuxsink muxer=matroskamux max-size-time=15000000000 max-files=3 location="/home/pi/infobeamer-tb/toolbox/3dprinter/media/ctc_%d.mkv"
+Type=simple
+Restart=always
+
+[Install]
+WantedBy=info-beamer.service
+
