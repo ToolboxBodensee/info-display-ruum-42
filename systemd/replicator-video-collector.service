@@ -3,7 +3,7 @@ Description=replicator image collector
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/gst-launch-1.0 -e urisourcebin uri=http://replicator.tbbs.me/webcam/?action=stream ! multipartdemux ! image/jpeg,framerate=10/1 ! jpegparse ! jpegdec ! videorate ! video/x-raw,framerate=10/1 ! avenc_h264_omx ! h264parse config-interval=-1 ! splitmuxsink muxer=matroskamux max-size-time=15000000000 max-files=3 location="/home/pi/infobeamer-tb/toolbox/3dprinter/media/replicator_%d.mkv"
+ExecStart=/usr/bin/gst-launch-1.0 -e urisourcebin uri=http://replicator.tbbs.me/webcam/?action=stream ! multipartdemux ! image/jpeg,framerate=10/1 ! jpegparse ! jpegdec ! videorate ! video/x-raw,framerate=10/1 ! avenc_h264_omx ! h264parse config-interval=-1 ! splitmuxsink muxer=matroskamux max-size-time=15000000000 max-files=5 location="/home/pi/infobeamer-tb/toolbox/3dprinter/media/replicator_%d.mkv"
 Type=simple
 Restart=always
 
