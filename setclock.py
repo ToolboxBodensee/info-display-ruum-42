@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import socket, datetime
 
 now = datetime.datetime.now()

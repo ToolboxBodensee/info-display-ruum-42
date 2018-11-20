@@ -1,0 +1,13 @@
+[Unit]
+Description=get public transport information
+After=network.target
+
+[Service]
+WorkingDirectory=/home/pi/infobeamer-tb/toolbox/oepnv/
+ExecStart=/home/pi/infobeamer-tb/toolbox/oepnv/service
+Type=simple
+Restart=always
+
+[Install]
+WantedBy=info-beamer.service
+
