@@ -1,0 +1,11 @@
+[Unit]
+Description=set the analogclock time
+After=info-beamer.service
+
+[Service]
+ExecStart=/home/pi/infobeamer-tb/setclock.py
+Type=oneshot
+
+[Install]
+WantedBy=info-beamer.service
+
