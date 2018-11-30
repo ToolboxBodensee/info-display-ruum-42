@@ -3,6 +3,7 @@ Description=set the analogclock time
 After=info-beamer.service
 
 [Service]
+ExecStartPre=/bin/sleep 30
 ExecStart=/home/pi/infobeamer-tb/setclock.py
 Type=oneshot
 
