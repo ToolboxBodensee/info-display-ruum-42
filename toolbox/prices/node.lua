@@ -9,17 +9,15 @@ util.resource_loader{
 local Absatz = "absatz"
 
 local preise = {
-    {"Mate",      "1.5"},
-    {"Bier/Radler",      "1.5"},
-    {"Premium Cola",      "1.5"},
-    {"Spezi, Saft",     "1"},
-    {"Glorietta",     "1"},
-    {"Plastikflasche",    "0.75"},
+    {"Mate",      "1.50"},
+    {"Bier/Radler",      "1.00"},
+    {"Apfelschorle, Spezi-Mix",   "1.00"},
     {"Wasser",    "0.75"},
+    {"Kaffee",    "0.50"},
     Absatz,
-    {"Snacks",   "0.5"},
-    {"Waffeln",   "0.5"},
-    {"Pizza*",   "2,5"},
+    {"Snacks",   "0.50"},
+    {"Waffeln",   "0.50"},
+    {"Pizza*",   "2,50"},
 }
 
 function Preisliste(preise, x, y, spacing, size)
