@@ -10,14 +10,14 @@ local Absatz = "absatz"
 
 local preise = {
     {"Mate",      "1.50"},
-    {"Bier/Radler",      "2.00"},
-    {"Apfelschorle, Spezi-Mix",   "1.00"},
+    {"Bier/Radler",      "1.50"},
+    {"Softdrinks",   "1.00"},
     {"Wasser",    "0.75"},
     {"Kaffee",    "0.50"},
     Absatz,
-    {"Snacks",   "0.50"},
+    {"Snacks, Eis",   "0.50"},
     {"Waffeln",   "0.50"},
-    {"warmes Essen*",   "4,00"},
+    {"TK-Pizza",   "2,50"},
 }
 
 function Preisliste(preise, x, y, spacing, size)
