@@ -15,6 +15,8 @@ local SWITCH_TIME = 2.0
 local MEDIA_DIRECTORY = ''
 -- local MEDIA_DIRECTORY = 'media'
 
+local font = resource.load_font("Lato-Heavy.ttf")
+
 ----------------------------------------------------------------
 local ALL_CONTENTS, ALL_CHILDS = node.make_nested()
 
@@ -45,7 +47,7 @@ end
 local pictures = util.generator(function()
     local files = {}
     for name, _ in pairs(ALL_CONTENTS[MEDIA_DIRECTORY]) do
-        if name:match(".*jpg") or name:match(".*png") then
+        if name:match(".*jpg$") or name:match(".*png$") then
             files[#files+1] = name
         end
     end
@@ -57,6 +59,7 @@ end)
 
 local current_image = resource.create_colored_texture(0,0,0,0)
 local fade_start = 0
+local info_text = nil
 
 local function next_image()
     local next_image_name = pictures.next()
@@ -64,6 +67,9 @@ local function next_image()
     last_image = current_image
     current_image = resource.load_image(next_image_name)
     fade_start = sys.now()
+        
+    info_text = nil
+    info_text = resource.load_file(next_image_name .. ".txt")
 end
 
 function node.render()
@@ -80,6 +86,14 @@ function node.render()
             last_image = nil
         end
         util.draw_correct(current_image, 0, 0, WIDTH, HEIGHT)
+        
+        if info_text then
+            text_y = 56
+            for line in info_text:gmatch("([^\n]*)\n?") do
+                font:write(NATIVE_WIDTH /2 - font:width(line, 64) /2, text_y, line, 64, 1,1,1,1)
+                text_y = text_y + 100
+            end
+        end
     end
 end
 
