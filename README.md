@@ -1,6 +1,8 @@
  Info-Beamer in der Toolbox
 ===============================
 
+**Entwicklung nur auf [GitLab](https://gitlab.com/ToolboxBodensee/info-display-ruum-42). Auf GitHub befindet sich lediglich ein Mirror**
+
 In der Toolbox gibt es vor dem ruum42 ein [Info-Display](https://toolbox-bodensee.de/projekte/info-display/).
 
 Dort läuft die Software info-beamer auf einem Raspberry Pi. Dokumentation zu dem System gibt es auf [info-beamer.com/doc](https://info-beamer.com/doc/info-beamer)
