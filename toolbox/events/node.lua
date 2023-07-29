@@ -1,6 +1,6 @@
 -- at which intervals should the screen switch to the
 -- next image?
-local INTERVAL = 5 
+local INTERVAL = 10
 
 -- enough time to load next image
 local SWITCH_DELAY = 1
@@ -51,7 +51,7 @@ local pictures = util.generator(function()
             files[#files+1] = name
         end
     end
-    return randsort(files) -- sort files by filename
+    return alphanumsort(files) -- sort files by filename
 end)
 node.event("content_remove", function(filename)
     pictures:remove(filename)
