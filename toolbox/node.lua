@@ -35,24 +35,22 @@ function make_switcher(childs, interval)
         end
         util.draw_correct(resource.render_child(child), 0, 0, WIDTH, HEIGHT)
 
-        local remaining = next_switch - sys.now()
-        if remaining < 0.2 or remaining > interval - 0.2 then
-            util.post_effect(distort_shader, {
-                effect = 5 + remaining * math.sin(sys.now() * 50);
-            })
-        end
+        -- distortion flash disabled (temporary patch)
     end
     return {
         draw = draw;
     }
 end
 
+-- TEMPORARY PATCH: only show the videolist child (playlist.txt: klo-full.mp4).
+-- Revert to the CHILDS loop below to restore the normal rotation.
 local switcher = make_switcher(util.generator(function()
-    local cycle = {}
-    for child, updated in pairs(CHILDS) do
-        table.insert(cycle, child)
-    end
-    return cycle
+    return {"videolist"}
+    -- local cycle = {}
+    -- for child, updated in pairs(CHILDS) do
+    --     table.insert(cycle, child)
+    -- end
+    -- return cycle
 end), interval)
 
 
